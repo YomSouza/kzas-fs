@@ -905,6 +905,11 @@
   "resolved" "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.6.tgz"
   "version" "0.5.6"
 
+"@headlessui/vue@^1.4.3":
+  "integrity" "sha512-cDAd3aP7jH5bO2WO4eSkyQQg0k6Zw8gobl+zL8LGApqix28EtlxultyKH/mVKnbo8Kiq6IDRzwP1HfKOf1QZbQ=="
+  "resolved" "https://registry.npmjs.org/@headlessui/vue/-/vue-1.4.3.tgz"
+  "version" "1.4.3"
+
 "@inertiajs/inertia-vue3@^0.5.1":
   "integrity" "sha512-X9TiXTP4oVQ3bs4/yZz6O3vTTJ1f4W5EimhU9U/uUUfyU3IeWFk6yjNzkCb4D3FllMfKfX+inKIugQV1vb8asA=="
   "resolved" "https://registry.npmjs.org/@inertiajs/inertia-vue3/-/inertia-vue3-0.5.2.tgz"
@@ -1954,11 +1959,6 @@
   "integrity" "sha512-hUewv7oMjCp+wkBv5Rm0v87eJhq4woh5rSR+42YSQJKecCqgIqNkZ6lAlQms/BwHPJA5NKMRlpxPRv0n8HQW6g=="
   "resolved" "https://registry.npmjs.org/colorette/-/colorette-2.0.16.tgz"
   "version" "2.0.16"
-
-"colors@^1.1.2":
-  "integrity" "sha512-urbBmMVnD1vk0mUwCpnWv06P3f16EF+RMTtIXTkylJk5mAdfrMepu9B3hhSnL8DGkc1Ra6pENJHrXTKvcAZ0wA=="
-  "resolved" "https://registry.npmjs.org/colors/-/colors-1.4.1.tgz"
-  "version" "1.4.1"
 
 "commander@^2.20.0", "commander@^2.9.0":
   "integrity" "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="

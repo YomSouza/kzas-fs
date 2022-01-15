@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('/usuarios', [UserController::class, 'index'])->name('users');
+    Route::put('/usuarios/{id}/toggle-dashboard-access', [UserController::class, 'toggleDashboardAccess'])->name('users.toggle-dashboard-access');
+});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
