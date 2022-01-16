@@ -1,7 +1,9 @@
 <template>
   <form @submit.prevent="search">
-    <slot />
-    <div class="flex items-center justify-end space-x-2">
+    <div class="flex flex-wrap">
+      <slot />
+    </div>
+    <div class="flex items-center justify-end mt-2 mb-4 space-x-2">
       <BreezeButton
         type="submit"
         class="rounded-full"

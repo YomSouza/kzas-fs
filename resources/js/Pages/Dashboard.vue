@@ -15,118 +15,111 @@
     >
       <Forbidden title="Entre em contato com os admistradores para ter acesso aos recursos." />
     </div>
+
     <template v-else>
-      <div class="flex flex-col mx-2 sm:mx-6">
+      <div class="p-8">
         <Filters
           @search="getDevs(true)"
           @reset="resetSearch"
           :blockSearch="blockSearch"
-          class="space-y-4 "
         >
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-            <div class="p-2">
-              <BreezeLabel
-                for="name"
-                value="Nome"
+          <div class="w-full md:w-1/2 p-2">
+            <BreezeLabel
+              for="name"
+              value="Nome"
+            />
+            <BreezeInput
+              id="name"
+              type="text"
+              class="mt-1 block w-full"
+              v-model="search.name"
+              @keyup.enter="getDevs"
+            />
+          </div>
+          <div class="w-full md:w-1/2 p-2">
+            <BreezeLabel
+              for="language"
+              value="Linguagem"
+            />
+            <BreezeSelect
+              id="language"
+              v-model="search.language"
+              :options="languages"
+            />
+          </div>
+          <div class="w-full md:w-1/2 p-2">
+            <BreezeLabel
+              for="location"
+              value="Localização"
+            />
+            <BreezeSelect
+              id="location"
+              v-model="search.location"
+              :options="locations"
+            />
+          </div>
+          <div class="w-full md:w-1/2 p-2">
+            <BreezeLabel
+              for="sponsorable"
+              value="Capacidade de Patrocínio"
+            />
+            <div class="flex items-center mt-1 p-1">
+              <input
+                type="checkbox"
+                v-model="search.sponsorable"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              >
+              <span class="ml-2 text-base text-gray-700">
+                Disponível
+              </span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 p-2">
+            <BreezeLabel
+              for="repo"
+              value="Repositórios"
+            />
+            <div class="grid grid-cols-2 gap-2">
+              <BreezeInput
+                id="repo-min"
+                type="number"
+                class="mt-1 block"
+                v-model="search.repoMin"
+                min="1"
+                placeholder="Mín."
               />
               <BreezeInput
-                id="name"
-                type="text"
-                class="mt-1 block w-full"
-                v-model="search.name"
-                @keyup.enter="getDevs"
-                autocomplete="name"
+                id="repo_max"
+                type="number"
+                class="mt-1 block"
+                v-model="search.repoMax"
+                min="1"
+                placeholder="Max."
               />
             </div>
-            <div class="col-sm-4 m-2">
-              <BreezeLabel
-                for="language"
-                value="Linguagem"
+          </div>
+          <div class="w-full md:w-1/2 p-2">
+            <BreezeLabel
+              for="repo"
+              value="Seguidores"
+            />
+            <div class="grid grid-cols-2 gap-2">
+              <BreezeInput
+                id="followers-min"
+                type="number"
+                class="mt-1"
+                v-model="search.followersMin"
+                min="1"
+                placeholder="Mín."
               />
-              <BreezeSelect
-                id="language"
-                v-model="search.language"
-                :options="languages"
+              <BreezeInput
+                id="repo_max"
+                type="number"
+                class="mt-1"
+                v-model="search.followersMax"
+                min="1"
+                placeholder="Max."
               />
-            </div>
-            <div class="col-sm-4 m-2">
-              <BreezeLabel
-                for="location"
-                value="Localização"
-              />
-              <BreezeSelect
-                id="location"
-                v-model="search.location"
-                :options="locations"
-              />
-            </div>
-            <div class="p-2">
-              <BreezeLabel
-                for="sponsorable"
-                value="Capacidade de Patrocínio"
-              />
-              <div class="flex items-center mt-1 p-1">
-                <input
-                  type="checkbox"
-                  v-model="search.sponsorable"
-                  class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                >
-                <span class="ml-2 text-base text-gray-700">
-                  Disponível
-                </span>
-              </div>
-            </div>
-            <div class="p-2">
-              <BreezeLabel
-                for="repo"
-                value="Repositórios"
-              />
-              <div class="grid grid-cols-2 gap-2">
-                <BreezeInput
-                  id="repo-min"
-                  type="number"
-                  class="mt-1 block"
-                  v-model="search.repoMin"
-                  min="1"
-                  placeholder="Mín."
-                  autocomplete="repoMin"
-                />
-                <BreezeInput
-                  id="repo_max"
-                  type="number"
-                  class="mt-1 block"
-                  v-model="search.repoMax"
-                  min="1"
-                  placeholder="Max."
-                  autocomplete="repoMax"
-                />
-              </div>
-            </div>
-            <div class="p-2">
-              <BreezeLabel
-                for="repo"
-                value="Seguidores"
-              />
-              <div class="grid grid-cols-2 gap-2">
-                <BreezeInput
-                  id="followers-min"
-                  type="number"
-                  class="mt-1"
-                  v-model="search.followersMin"
-                  min="1"
-                  placeholder="Mín."
-                  autocomplete="followersMin"
-                />
-                <BreezeInput
-                  id="repo_max"
-                  type="number"
-                  class="mt-1"
-                  v-model="search.followersMax"
-                  min="1"
-                  placeholder="Max."
-                  autocomplete="followersMax"
-                />
-              </div>
             </div>
           </div>
         </Filters>
@@ -156,7 +149,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="text-center sm:text-left">
               <BreezeButton
                 @click="devDetails(dev)"
                 class="rounded-full"
@@ -183,19 +176,21 @@
         <div class="px-6 pb-4">
           <div class="flex flex-auto my-1">
             <span
-              v-if="Object.keys(devs).length > 0"
+              v-if="devs.total_count"
               class="flex-1 text-right my-1 text-sm text-gray-500"
             >
-              {{ devs.total_count }} registros encontrados
+              {{ devs.total_count }} registro(s) encontrado(s)
             </span>
           </div>
           <Pagination
+            v-if="devs.total_count && devs.total_count > search.per_page"
             :page="search.page"
             @next="next"
             @previous="previous"
           />
         </div>
       </div>
+
       <TransitionRoot
         as="template"
         :show="isOpen"
@@ -233,165 +228,167 @@
               leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div class="sm:flex sm:items-start">
-                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-24 w-24 sm:mx-0">
-                      <img
-                        :src="devSelected.avatar_url"
-                        class="rounded-full"
-                        alt="Avatar url"
-                      />
+                <div class="px-6 pt-5 pb-4 sm:p-6 sm:pb-4 space-y-4">
 
+                  <div class="grid grid-cols-3 items-center bg-white">
+                    <div class="col-span-2 flex items-center">
+                      <div class="flex items-center sm:justify-center h-24 w-24 sm:mx-0">
+                        <img
+                          :src="devSelected.avatar_url"
+                          class="rounded-full"
+                          alt="Avatar url"
+                        />
+                      </div>
+
+                      <DialogTitle
+                        as="h3"
+                        class="flex flex-col text-gray-800 ml-4"
+                      >
+                        <span class="font-bold text-xl">
+                          {{ devSelected.name }}
+                        </span>
+                        <span class="font-medium text-lg">{{ devSelected.login }}</span>
+                      </DialogTitle>
                     </div>
-                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <div class="flex flex-col justify-between items-center sm:flex-row">
-                        <DialogTitle
-                          as="h3"
-                          class="flex flex-col text-gray-800 max-w-full"
-                        >
-                          <span class="font-bold text-xl">
-                            {{ devSelected.name }}
-                          </span>
-                          <span class="font-medium text-lg">{{ devSelected.login }}</span>
-                        </DialogTitle>
-                        <div
-                          :class="pointsHighlight"
-                          class="flex justify-center items-center text-5xl p-4 rounded-full"
-                        >
-                          <span class="text-gray-800">
-                            {{ points }}
-                          </span>
-                        </div>
-                        <!-- </div> -->
+
+                    <div class="col-span-1 flex justify-end">
+                      <div
+                        :class="pointsHighlight"
+                        class="flex justify-center items-center text-4xl sm:text-5xl p-4 rounded-full"
+                      >
+                        <span class="text-gray-800">
+                          {{ points }}
+                        </span>
                       </div>
-                      <div class="mt-4 sm:mt-2 space-y-2 sm:space-y-1">
-                        <div
-                          v-if="devSelected.company || false"
-                          class="flex space-x-1 text-sm text-gray-700"
-                        >
-                          <svg
-                            class="fill-gray-700 w-4 h-4"
-                            viewBox="0 0 16 16"
-                            version="1.1"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M1.5 14.25c0 .138.112.25.25.25H4v-1.25a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.25h2.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-8.5a.25.25 0 00-.25.25v12.5zM1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z"
-                            ></path>
-                          </svg>
-                          <span>{{ devSelected.company }}</span>
-                        </div>
-                        <div
-                          v-if="devSelected.location"
-                          class="flex space-x-1 text-sm text-gray-700"
-                        >
-                          <svg
-                            class="fill-gray-700 w-4 h-4"
-                            viewBox="0 0 16 16"
-                            version="1.1"
-                            width="16"
-                            height="16"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M11.536 3.464a5 5 0 010 7.072L8 14.07l-3.536-3.535a5 5 0 117.072-7.072v.001zm1.06 8.132a6.5 6.5 0 10-9.192 0l3.535 3.536a1.5 1.5 0 002.122 0l3.535-3.536zM8 9a2 2 0 100-4 2 2 0 000 4z"
-                            ></path>
-                          </svg>
-                          <span>{{ devSelected.location }}</span>
-                        </div>
-                        <div class="flex space-x-1 text-sm text-gray-700">
-                          <svg
-                            class="fill-gray-700 w-4 h-4"
-                            aria-hidden="true"
-                            viewBox="0 0 16 16"
-                            version="1.1"
-                            data-view-component="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5.5 3.5a2 2 0 100 4 2 2 0 000-4zM2 5.5a3.5 3.5 0 115.898 2.549 5.507 5.507 0 013.034 4.084.75.75 0 11-1.482.235 4.001 4.001 0 00-7.9 0 .75.75 0 01-1.482-.236A5.507 5.507 0 013.102 8.05 3.49 3.49 0 012 5.5zM11 4a.75.75 0 100 1.5 1.5 1.5 0 01.666 2.844.75.75 0 00-.416.672v.352a.75.75 0 00.574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 101.434-.44 5.01 5.01 0 00-2.56-3.012A3 3 0 0011 4z"
-                            ></path>
-                          </svg>
-                          <span><strong>{{ devSelected.followers }}</strong> seguidores</span>
-                          <span><strong>{{ devSelected.following }}</strong> seguindo</span>
-                        </div>
-                        <div class="flex space-x-1 text-sm text-gray-700">
-                          <svg
-                            class="fill-gray-700 w-4 h-4"
-                            aria-hidden="true"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            version="1.1"
-                            width="16"
-                            data-view-component="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"
-                            ></path>
-                          </svg>
-                          <span><strong>{{ devSelected.public_repos }}</strong> repos</span>
-                          <span><strong>{{ devSelected.public_gists }}</strong> gists</span>
-                        </div>
-                        <div
-                          v-if="devSelected.blog"
-                          class="flex space-x-1 text-sm text-gray-700"
-                        >
-                          <svg
-                            class="fill-gray-700 w-4 h-4"
-                            aria-hidden="true"
-                            viewBox="0 0 16 16"
-                            version="1.1"
-                            data-view-component="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
-                            ></path>
-                          </svg>
-                          <a
-                            :href="devSelected.blog"
-                            class="hover:text-blue-500 hover:underline"
-                            target="_blank"
-                            rel="nofollow me"
-                          >
-                            {{ devSelected.blog }}
-                          </a>
-                        </div>
-                        <div
-                          v-if="devSelected.twitter_username"
-                          class="flex space-x-1 text-sm text-gray-700"
-                        >
-                          <svg
-                            class="fill-gray-700 w-4 h-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 273.5 222.3"
-                            role="img"
-                            aria-labelledby="5x8pe2yzqmcthy8s6uy9lwcd38gtx2w"
-                          >
-                            <title id="5x8pe2yzqmcthy8s6uy9lwcd38gtx2w">Twitter</title>
-                            <path
-                              d="M273.5 26.3a109.77 109.77 0 0 1-32.2 8.8 56.07 56.07 0 0 0 24.7-31 113.39 113.39 0 0 1-35.7 13.6 56.1 56.1 0 0 0-97 38.4 54 54 0 0 0 1.5 12.8A159.68 159.68 0 0 1 19.1 10.3a56.12 56.12 0 0 0 17.4 74.9 56.06 56.06 0 0 1-25.4-7v.7a56.11 56.11 0 0 0 45 55 55.65 55.65 0 0 1-14.8 2 62.39 62.39 0 0 1-10.6-1 56.24 56.24 0 0 0 52.4 39 112.87 112.87 0 0 1-69.7 24 119 119 0 0 1-13.4-.8 158.83 158.83 0 0 0 86 25.2c103.2 0 159.6-85.5 159.6-159.6 0-2.4-.1-4.9-.2-7.3a114.25 114.25 0 0 0 28.1-29.1"
-                              fill="currentColor"
-                            ></path>
-                          </svg>
-                          <a
-                            :href="`https://twitter.com/${devSelected.twitter_username}`"
-                            class="hover:text-blue-500 hover:underline"
-                            target="_blank"
-                            rel="nofollow me"
-                          >
-                            @{{ devSelected.twitter_username }}
-                          </a>
-                        </div>
-                      </div>
-                      <div class="mt-4">
-                        <p class="text-left text-gray-900">
-                          {{ devSelected.bio }}
-                        </p>
-                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-1.5">
+                    <div
+                      v-if="devSelected.company || false"
+                      class="flex space-x-1 text-sm text-gray-700"
+                    >
+                      <svg
+                        class="fill-gray-700 w-4 h-4"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M1.5 14.25c0 .138.112.25.25.25H4v-1.25a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.25h2.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-8.5a.25.25 0 00-.25.25v12.5zM1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z"
+                        ></path>
+                      </svg>
+                      <span>{{ devSelected.company }}</span>
+                    </div>
+                    <div
+                      v-if="devSelected.location"
+                      class="flex space-x-1 text-sm text-gray-700"
+                    >
+                      <svg
+                        class="fill-gray-700 w-4 h-4"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M11.536 3.464a5 5 0 010 7.072L8 14.07l-3.536-3.535a5 5 0 117.072-7.072v.001zm1.06 8.132a6.5 6.5 0 10-9.192 0l3.535 3.536a1.5 1.5 0 002.122 0l3.535-3.536zM8 9a2 2 0 100-4 2 2 0 000 4z"
+                        ></path>
+                      </svg>
+                      <span>{{ devSelected.location }}</span>
+                    </div>
+                    <div class="flex space-x-1 text-sm text-gray-700">
+                      <svg
+                        class="fill-gray-700 w-4 h-4"
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        data-view-component="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.5 3.5a2 2 0 100 4 2 2 0 000-4zM2 5.5a3.5 3.5 0 115.898 2.549 5.507 5.507 0 013.034 4.084.75.75 0 11-1.482.235 4.001 4.001 0 00-7.9 0 .75.75 0 01-1.482-.236A5.507 5.507 0 013.102 8.05 3.49 3.49 0 012 5.5zM11 4a.75.75 0 100 1.5 1.5 1.5 0 01.666 2.844.75.75 0 00-.416.672v.352a.75.75 0 00.574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 101.434-.44 5.01 5.01 0 00-2.56-3.012A3 3 0 0011 4z"
+                        ></path>
+                      </svg>
+                      <span><strong>{{ devSelected.followers }}</strong> seguidores</span>
+                      <span><strong>{{ devSelected.following }}</strong> seguindo</span>
+                    </div>
+                    <div class="flex space-x-1 text-sm text-gray-700">
+                      <svg
+                        class="fill-gray-700 w-4 h-4"
+                        aria-hidden="true"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        width="16"
+                        data-view-component="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"
+                        ></path>
+                      </svg>
+                      <span><strong>{{ devSelected.public_repos }}</strong> repos</span>
+                      <span><strong>{{ devSelected.public_gists }}</strong> gists</span>
+                    </div>
+                    <div
+                      v-if="devSelected.blog"
+                      class="flex space-x-1 text-sm text-gray-700"
+                    >
+                      <svg
+                        class="fill-gray-700 w-4 h-4"
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        data-view-component="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+                        ></path>
+                      </svg>
+                      <a
+                        :href="devSelected.blog"
+                        class="hover:text-blue-500 hover:underline"
+                        target="_blank"
+                        rel="nofollow me"
+                      >
+                        {{ devSelected.blog }}
+                      </a>
+                    </div>
+                    <div
+                      v-if="devSelected.twitter_username"
+                      class="flex space-x-1 text-sm text-gray-700"
+                    >
+                      <svg
+                        class="fill-gray-700 w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 273.5 222.3"
+                        role="img"
+                        aria-labelledby="5x8pe2yzqmcthy8s6uy9lwcd38gtx2w"
+                      >
+                        <title id="5x8pe2yzqmcthy8s6uy9lwcd38gtx2w">Twitter</title>
+                        <path
+                          d="M273.5 26.3a109.77 109.77 0 0 1-32.2 8.8 56.07 56.07 0 0 0 24.7-31 113.39 113.39 0 0 1-35.7 13.6 56.1 56.1 0 0 0-97 38.4 54 54 0 0 0 1.5 12.8A159.68 159.68 0 0 1 19.1 10.3a56.12 56.12 0 0 0 17.4 74.9 56.06 56.06 0 0 1-25.4-7v.7a56.11 56.11 0 0 0 45 55 55.65 55.65 0 0 1-14.8 2 62.39 62.39 0 0 1-10.6-1 56.24 56.24 0 0 0 52.4 39 112.87 112.87 0 0 1-69.7 24 119 119 0 0 1-13.4-.8 158.83 158.83 0 0 0 86 25.2c103.2 0 159.6-85.5 159.6-159.6 0-2.4-.1-4.9-.2-7.3a114.25 114.25 0 0 0 28.1-29.1"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                      <a
+                        :href="`https://twitter.com/${devSelected.twitter_username}`"
+                        class="hover:text-blue-500 hover:underline"
+                        target="_blank"
+                        rel="nofollow me"
+                      >
+                        @{{ devSelected.twitter_username }}
+                      </a>
+                    </div>
+                    <div class="mt-4">
+                      <p class="text-left text-gray-900">
+                        {{ devSelected.bio }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -481,7 +478,7 @@ export default {
 
       let highlights = ['border-2']
 
-      highlights.push(Number.isInteger(points) ? 'w-20 h-20' : 'w-24 h-24')
+      highlights.push(Number.isInteger(points) ? 'w-16 h-16 sm:w-20 sm:h-20' : 'w-20 h-20 sm:w-24 sm:h-24')
 
       if (points >= 4) highlights.push('border-green-500 bg-green-100')
       else if (points >= 2) highlights.push('border-yellow-500 bg-yellow-100')
@@ -519,13 +516,15 @@ export default {
         })
     },
     getDevs (reset = false) {
+      if (this.blockSearch) return
       if (reset) this.search.page = 1
 
       devsService.get(this.search)
         .then(data => this.devs = data)
     },
     next () {
-      if (this.devs.total_count === 0 || (this.devs.total_count % this.search.per_page) > this.search.page) return
+      if ((this.devs.total_count / this.search.per_page) <= this.search.page) return
+
       ++this.search.page
       this.getDevs()
     },

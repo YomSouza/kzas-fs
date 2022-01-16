@@ -66,12 +66,9 @@ export default {
   name: "Pagination",
   methods: {
     next () {
-      console.log('pagination - next')
       this.$emit('next')
     },
     previous () {
-      console.log('pagination - previous')
-
       this.$emit('previous')
     }
   },
