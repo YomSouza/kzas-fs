@@ -18,7 +18,7 @@
       <template v-else>
         <Link
           :href="route('login')"
-          class="text-sm text-gray-700 underline"
+          class="text-sm text-gray-700 dark:text-gray-400 underline"
         >
         Entrar
         </Link>
@@ -26,7 +26,7 @@
         <Link
           v-if="canRegister"
           :href="route('register')"
-          class="ml-4 text-sm text-gray-700 underline"
+          class="ml-4 text-sm text-gray-700 dark:text-gray-400 underline"
         >
         Cadastre-se
         </Link>
@@ -91,7 +91,9 @@
       </div>
 
       <div class="flex justify-center items-center h-96 mt-8 overflow-hidden sm:rounded-lg">
-        <h3 class="text-4xl text-gray-800">Teste Full Stack Developer 🚀</h3>
+        <div class="text-center text-4xl text-gray-700 dark:text-gray-400">
+          Teste Full Stack Developer 🚀
+        </div>
       </div>
 
       <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
