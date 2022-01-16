@@ -91,7 +91,7 @@
       </div>
 
       <div class="flex justify-center items-center h-96 mt-8 overflow-hidden sm:rounded-lg">
-        <h3 class="text-4xl text-gray-800">Teste Fullstack Developer 🚀</h3>
+        <h3 class="text-4xl text-gray-800">Teste Full Stack Developer 🚀</h3>
       </div>
 
       <div class="flex justify-center mt-4 sm:items-center sm:justify-between">

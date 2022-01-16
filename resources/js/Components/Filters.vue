@@ -6,6 +6,7 @@
         type="submit"
         class="rounded-full"
         title="Buscar"
+        :disabled="blockSearch"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +61,12 @@ export default {
     },
     search () {
       this.$emit('search')
+    }
+  },
+  props: {
+    blockSearch: {
+      type: Boolean,
+      default: false
     }
   }
 }

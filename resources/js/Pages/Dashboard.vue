@@ -20,6 +20,7 @@
         <Filters
           @search="getDevs(true)"
           @reset="resetSearch"
+          :blockSearch="blockSearch"
           class="space-y-4 "
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
@@ -397,18 +398,11 @@
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                    @click="isOpen = false"
-                  >
-                    Deactivate
-                  </button>
-                  <button
-                    type="button"
                     class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     @click="isOpen = false"
                     ref="cancelButtonRef"
                   >
-                    Cancel
+                    Fechar
                   </button>
                 </div>
               </div>
@@ -437,6 +431,15 @@ import {
   Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot
 } from "@headlessui/vue";
 import { get } from '@/http'
+
+const defaultSearch = {
+  name: '',
+  location: undefined,
+  language: undefined,
+  sponsarable: false,
+  page: 1,
+  per_page: 10,
+}
 
 export default {
   components: {
@@ -485,7 +488,10 @@ export default {
       else highlights.push(' border-red-500 bg-red-100')
 
       return highlights.join(' ')
-    }
+    },
+    blockSearch () {
+      return _.isEqual(this.search, defaultSearch)
+    },
   },
   data () {
     return {
@@ -529,14 +535,7 @@ export default {
       this.getDevs()
     },
     resetSearch () {
-      this.search = {
-        name: '',
-        location: undefined,
-        language: undefined,
-        sponsarable: false,
-        page: 1,
-        per_page: 10,
-      }
+      this.search = { ...defaultSearch }
     },
     setIsOpen (value) {
       this.isOpen = value;
