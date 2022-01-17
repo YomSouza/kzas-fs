@@ -16,3 +16,7 @@ yarn-error.log
 public/css/app.css
 public/js/app.js
 .gitignore
+public/vendor/telescope/app-dark.css
+public/vendor/telescope/app.css
+.gitignore
+public/vendor/telescope/mix-manifest.json
